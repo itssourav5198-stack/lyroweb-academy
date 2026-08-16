@@ -1,0 +1,13 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Lecture videos are only readable by signed-in users who are marked enrolled
+    // in their Firestore /users/{uid} doc. Nobody can upload from the client —
+    // upload lecture files from the Firebase Console or Admin SDK.
+    match /lectures/{allPaths=**} {
+      allow read: if request.auth != null &&
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.enrolled == true;
+      allow write: if false;
+    }
+  }
+}

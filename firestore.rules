@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Each user can read/create their own profile, but NOT set their own `enrolled` field —
+    // that's only ever written by the backend (via Admin SDK, which bypasses these rules)
+    // after a verified Cashfree payment.
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+                    && request.resource.data.enrolled == false;
+      allow update: if request.auth != null && request.auth.uid == uid
+                    && request.resource.data.enrolled == resource.data.enrolled;
+
+      // A user's notes: fully private to them
+      match /notes/{lessonId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+
+    // Course/lesson metadata: readable by any signed-in user (titles/descriptions aren't secret —
+    // the video itself is protected separately by Storage rules below).
+    match /courses/{courseId} {
+      allow read: if request.auth != null;
+      allow write: if false; // manage from Firebase Console / admin only
+
+      match /lessons/{lessonId} {
+        allow read: if request.auth != null;
+        allow write: if false;
+      }
+    }
+  }
+}

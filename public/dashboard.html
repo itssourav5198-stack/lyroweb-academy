@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — LyroWeb Academy</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar__logo">LyroWeb <span>Academy</span></div>
+
+      <div class="sidebar__section-label">Course</div>
+      <div class="pill" id="course-pill">Loading…</div>
+
+      <div class="sidebar__user">
+        <div id="user-name">—</div>
+        <div class="email" id="user-email">—</div>
+        <button class="btn btn-ghost" id="logout-btn" style="margin-top:14px;">Log out</button>
+      </div>
+    </aside>
+
+    <div>
+      <div class="topbar">
+        <h1>AI Mastery Course</h1>
+        <div id="enroll-status"></div>
+      </div>
+
+      <main class="main-scroll">
+        <div id="paywall-area"></div>
+        <div class="deck-grid" id="lesson-grid"></div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

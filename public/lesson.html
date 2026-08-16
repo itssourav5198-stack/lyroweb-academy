@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lesson — LyroWeb Academy</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar__logo">LyroWeb <span>Academy</span></a>
+      <div class="sidebar__section-label">Course</div>
+      <a href="dashboard.html" class="btn btn-ghost" style="text-align:left;">← Back to lessons</a>
+      <div class="sidebar__user">
+        <div id="user-name">—</div>
+        <div class="email" id="user-email">—</div>
+        <button class="btn btn-ghost" id="logout-btn" style="margin-top:14px;">Log out</button>
+      </div>
+    </aside>
+
+    <div>
+      <div class="topbar">
+        <h1 id="lesson-title">Loading…</h1>
+      </div>
+
+      <main class="main-scroll">
+        <div class="lesson-layout">
+          <div>
+            <div class="video-frame" id="video-frame"></div>
+            <div class="lesson-info">
+              <h2 id="lesson-title-2"></h2>
+              <p id="lesson-desc"></p>
+            </div>
+          </div>
+
+          <div class="notes-panel">
+            <h3>Your notes</h3>
+            <div class="save-state" id="save-state">Saved</div>
+            <textarea id="notes-input" placeholder="Jot down what stands out — timestamps, prompts, ideas to try..."></textarea>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/lesson.js"></script>
+</body>
+</html>
