@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lesson — LyroWeb Academy</title>
+<title>Doubts — LyroWeb Academy</title>
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -22,29 +22,20 @@
 
     <div>
       <div class="topbar">
-        <h1 id="lesson-title">Loading…</h1>
+        <h1>Doubts</h1>
       </div>
 
       <main class="main-scroll">
-        <div class="lesson-layout">
-          <div>
-            <div class="video-frame" id="video-frame"></div>
-            <div class="lesson-info">
-              <h2 id="lesson-title-2"></h2>
-              <p id="lesson-desc"></p>
-            </div>
-          </div>
+        <form class="doubt-composer" id="doubt-form">
+          <textarea id="doubt-input" placeholder="Got stuck somewhere? Ask your doubt here — mention the lesson name if it helps." required></textarea>
+          <button type="submit" class="btn btn-primary" id="doubt-submit-btn" style="width:auto;padding:10px 24px;margin-top:10px;">Post doubt</button>
+        </form>
 
-          <div class="notes-panel">
-            <h3>Your notes</h3>
-            <div class="save-state" id="save-state">Saved</div>
-            <textarea id="notes-input" placeholder="Jot down what stands out — timestamps, prompts, ideas to try..."></textarea>
-          </div>
-        </div>
+        <div id="doubt-list" class="doubt-list"></div>
       </main>
     </div>
   </div>
 
-  <script type="module" src="js/lesson.js"></script>
+  <script type="module" src="js/doubts.js"></script>
 </body>
 </html>

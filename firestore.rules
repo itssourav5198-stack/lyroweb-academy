@@ -29,5 +29,23 @@ service cloud.firestore {
         allow write: if false;
       }
     }
+
+    // Doubt engine: any signed-in student can post a doubt or reply.
+    // Only the author can edit/delete their own doubt or reply.
+    match /doubts/{doubtId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if request.auth != null
+                    && resource.data.uid == request.auth.uid;
+
+      match /replies/{replyId} {
+        allow read: if request.auth != null;
+        allow create: if request.auth != null
+                      && request.resource.data.uid == request.auth.uid;
+        allow update, delete: if request.auth != null
+                      && resource.data.uid == request.auth.uid;
+      }
+    }
   }
 }
