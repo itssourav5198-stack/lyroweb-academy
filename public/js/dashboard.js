@@ -112,25 +112,13 @@ async function renderLessons() {
   }
 }
 
-async function startCheckout() {
-  try {
-    const res = await fetch(`${API_BASE}/create-order`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        uid: currentUser.uid,
-        email: currentUser.email,
-        name: currentUser.displayName,
-        courseId: COURSE_ID,
-      }),
-    });
-    const data = await res.json();
-    if (data.paymentLink) {
-      window.location.href = data.paymentLink;
-    } else {
-      alert("Could not start checkout. Please try again.");
-    }
-  } catch (e) {
-    alert("Checkout server isn't reachable. Make sure the /server backend is running (see README).");
-  }
+// Static Cashfree Payment Link — no backend order-creation call needed for this flow.
+// NOTE: this does NOT auto-enroll the student. Cashfree's hosted payment-links
+// don't call your /create-order or /cashfree-webhook routes, so after a student
+// pays you'll need to manually set enrolled: true on their /users/{uid} doc in
+// the Firestore console (or build a webhook for this link later).
+const CASHFREE_PAYMENT_LINK = "https://payments.cashfree.com/forms/ai-mastery-course";
+
+function startCheckout() {
+  window.location.href = CASHFREE_PAYMENT_LINK;
 }
